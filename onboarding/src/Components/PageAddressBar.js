@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import LoggedUser from "./hooks/LoggedUser.js";
 
-function PageAddressBar(props) {
-    let loggedUser = (props.loggedUser)?props.loggedUser:LoggedUser();
-
+function PageAddressBar({ page }) {
     return(
         <header className="page-title-bar">
             <div className="card card-fluid">
@@ -13,9 +10,9 @@ function PageAddressBar(props) {
                     <hr />
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
-                            <Link to={{ pathname: "/", state: {loggedUser: loggedUser} }}>Pulpit</Link>
+                            <Link to="/">DASHBOARD</Link>
                         </li>
-                        <li className="breadcrumb-item active">{ props.page }</li>
+                        <li className="breadcrumb-item active">{ page }</li>
                     </ol>
                 </div>
             </div>

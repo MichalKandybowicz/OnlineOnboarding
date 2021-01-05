@@ -1,31 +1,24 @@
 import React, { useRef } from "react";
-
-//import "../static/looper/stylesheets/theme.min.css";
-//import "../static/looper/stylesheets/theme-dark.min.css";
-
 import EmployeeEditForm from "./EmployeeEditForm";
-import Navbar from "../Navbar";
-import LeftMenu from "../LeftMenu";
 import PageAddressBar from "../PageAddressBar"
-import LoggedUser from "../hooks/LoggedUser.js";
 
 function UserManagerProfilePage(props) {
     document.title = "Onboarding: profil pracownika";
-    const packageIdRef = useRef(0);
+    // const packageIdRef = useRef(0);
     const singleUser = {id: 0, name: "", last_name: "", email: "", tel: "",
         position: "", department: "", location: "", avatar: "/onboarding/static/images/unknown-profile.jpg"};
 
-
-    let stateExists = false, loggedUser;
-    if(props.location.state){
-        packageIdRef.current = props.location.state.packageId;
-        loggedUser = (props.location.state.loggedUser)?props.location.state.loggedUser:LoggedUser();
-
-        stateExists = true;
-    } else
-        loggedUser = LoggedUser();
-
-    if(stateExists && props.location.state.user){
+    // let stateExists = false, loggedUser;
+    // if(props.location.state){
+    //     packageIdRef.current = props.location.state.packageId;
+    //     loggedUser = (props.location.state.loggedUser)?props.location.state.loggedUser:LoggedUser();
+        
+    //     stateExists = true;
+    // } else
+    // loggedUser = LoggedUser();
+        
+    if(props.location.state?.user){
+        // if(stateExists && props.location.state.user){        
         let user = props.location.state.user;
         if(user.id)
             singleUser.id = user.id;
@@ -52,33 +45,23 @@ function UserManagerProfilePage(props) {
     }
 
     let enableUploadAvatar = false;
-    if(stateExists && props.location.state.enableUploadAvatar)
-        enableUploadAvatar = true;
+    // if(props.location.state.enableUploadAvatar)
+    //     enableUploadAvatar = true;
 
 
     return (
-    	<div className="app">
-    		<header className="app-header app-header-dark">
-    			<Navbar loggedUser={ loggedUser } />
-    		</header>
-    		<LeftMenu packageId = { packageIdRef.current } loggedUser={ loggedUser } />
-    		<main className="app-main">
-    			<div className="wrapper"><div className="page">
-    				<div className="page-inner">
-    					<PageAddressBar page = { "Profil pracownika" } loggedUser={ loggedUser } />
+        <div className="page-inner">
+            <PageAddressBar page = { "Profil pracownika" } />
 
-    					<div className="page-section">
-    						<div className="card card-fluid">
-    							<div className="card-header">Pracownik</div>
-    							<EmployeeEditForm user={ singleUser }
-    							                  loggedUser={ loggedUser }
-    							                  packageId={ packageIdRef.current }
-    							                  enableUploadAvatar={ enableUploadAvatar } />
-    						</div>
-    					</div>
-    				</div>
-    			</div></div>
-    	    </main>
+            <div className="page-section">
+                <div className="card card-fluid">
+                    <div className="card-header">Pracownik</div>
+                    <EmployeeEditForm 
+                        user={ singleUser }
+                        enableUploadAvatar={ enableUploadAvatar } 
+                    />
+                </div>
+            </div>
         </div>
     );
 }

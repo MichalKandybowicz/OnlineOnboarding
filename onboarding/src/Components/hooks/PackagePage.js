@@ -37,12 +37,8 @@ function PackagePage(props){
 		return <FormTableRow key={0} row={ {name: "Ładowanie ...", last_edit: ""} }/>
 	else {
 		var form_table = [], count = rows.length, maxOrder = -1, order;
-		let i, loggedUser = {id:0, first_name: ""};
 
-		if(props.loggedUser)
-			loggedUser = props.loggedUser;
-
-		for(i = 0; i < count; i++){
+		for(let i = 0; i < count; i++){
 			order = parseInt(rows[i].order, 10);
 			form_table.push(
         <FormTableRow
@@ -59,7 +55,6 @@ function PackagePage(props){
           handleRemoveAsk={ props.handleRemoveAsk }
           handleUpdate={props.handleUpdate}
           lastRow={newRowId === rows[i].id}
-          loggedUser={loggedUser}
         />
       );
 			if(order > maxOrder)

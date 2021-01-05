@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { getPath } from "./utils.js";
 
 function Navbar(props) {
-    let path = getPath();
-
     let loggedUser = {id: 0, avatar: "/onboarding/static/images/unknown-profile.jpg", email: "",
     	first_name: "username", last_name: "", phone_number: "", location: "", team: "", job_position: "", last_login: ""};
 
@@ -16,7 +14,6 @@ function Navbar(props) {
             loggedUser.avatar = "/onboarding/static/images/unknown-profile.jpg";
         }
     }
-
 
     const dropDownSwitch = () => {
         let dropDownList = document.getElementById("userDropDown");
@@ -30,10 +27,13 @@ function Navbar(props) {
         // <nav className="top-bar navbar navbar-expand-lg navbar-dark">
        <nav className="top-bar navbar p-0 flex-nowrap">
             <div className="top-bar-brand pr-5" style={{height: "auto"}}>
-                <Link to={{ pathname: "/", state: { packageId: 0, loggedUser: loggedUser } }} className="navbar-brand">Online Onboarding</Link>
+                <Link 
+                    to={{ pathname: "/", state: { packageId: 0 } }} 
+                    className="navbar-brand">Online Onboarding
+                </Link>
             </div>
 
-            <div className="pl-3 d-flex justify-content-center w-100">
+            {/* <div className="pl-3 d-flex justify-content-center w-100"> */}
                 {/* <div className="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
                     <button 
                         className={`hamburger hamburger-squeeze ${props.showAside ? "active" : ""}`} 
@@ -51,7 +51,7 @@ function Navbar(props) {
                     <input className="form-control col-6 mr-2" type="search" placeholder="Szukaj" aria-label="Szukaj"/>
                     <button className="btn btn-success col-auto" type="submit">Szukaj</button>
                 </form> */}
-            </div>
+            {/* </div> */}
             
             <div className="top-bar-item px-0">
                 <div className="dropdown d-flex">

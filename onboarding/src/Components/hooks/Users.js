@@ -170,5 +170,35 @@ export function employeeRemove(handleSuccess, userId){
 	return true;
 }
 
+export function getUsers(setIsEmployee, setEmployees, setIsLoaded) {
+	const url = getPath();
+  const fetchProps = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": "",
+    },
+  };
+
+	fetch(url + "api/users/", fetchProps)
+		.then((res) => res.json())
+		.then(
+			(result) => {
+				if (result === []) {
+					setIsEmployee(false);
+				} else {
+					setIsEmployee(true);
+					setEmployees(result);
+				}
+
+				setIsLoaded(true);
+			},
+			(error) => {
+				console.error(error);
+			}
+		);
+}
+
 export default Users;
 

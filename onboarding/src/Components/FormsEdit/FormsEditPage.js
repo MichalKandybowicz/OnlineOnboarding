@@ -1,20 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import FormSection from "./FormSection";
-import Navbar from "../Navbar";
-import LeftMenu from "../LeftMenu";
 import PageAddressBar from "../PageAddressBar";
 import FormDescription from "./FormDescription";
 import FormAddSection from "./FormAddSection";
 import FormSectionsAPI from "../hooks/FormSectionsAPI";
-import LoggedUser from "../hooks/LoggedUser.js";
 
 function FormsEditPage({ location, match }) {
-  const loggedUser = location.state?.loggedUser ?? LoggedUser();
   const pageId = match.params.form_id;
-  const packageIdRef = useRef(0);
-  if (match.params.form_id)
-    packageIdRef.current = match.params.form_id;
 
   const [maxOrder, updateMaxOrder] = useState(0);
   const [sections, setSections] = useState([]);
@@ -98,70 +91,57 @@ function FormsEditPage({ location, match }) {
   };
 
   return (
-    <div className="app">
-      <header className="app-header app-header-dark">
-        <Navbar loggedUser={loggedUser} />
-      </header>
-      <LeftMenu packageId={packageIdRef.current} loggedUser={loggedUser} />
-      <main className="app-main">
-        <div className="wrapper">
-          <div className="page has-sidebar-expand-xl">
-            <div className="page-inner">
-              <PageAddressBar
-                page={"Formularz / Edytuj"}
-                loggedUser={loggedUser}
-              />{" "}
-              <FormDescription location={location} pageId={pageId} />
-              <section className="page-section">
-                <header className="card-header">Sekcje strony</header>
-                <form onSubmit={handleSave}>
-                  <div className="row">
-                    <DragDropContext onDragEnd={onDragEnd}>
-                      <Droppable droppableId="dp1">
-                        {(provided) => (
-                          <div
-                            className="col"
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                          >
-                            {loading ? (
-                              <div className="p-3">Ładowanie...</div>
-                            ) : null}
-                            {errorMessage !== "" ? (
-                              <div className="p-3">{errorMessage}</div>
-                            ) : (
-                              <FormSection
-                                sections={sections}
-                                answers={answers}
-                                setAnswers={setAnswers}
-                                setSections={setSections}
-                                maxOrder={maxOrder}
-                                updateMaxOrder={updateMaxOrder}
-                              />
-                            )}
-                            {provided.placeholder}
-                          </div>
-                        )}
-                      </Droppable>
-                    </DragDropContext>
-                    <div className="col-auto">
-                      <FormAddSection
-                        setSections={setSections}
-                        sections={sections}
-                        setAnswers={setAnswers}
-                        answers={answers}
-                        updateMaxOrder={updateMaxOrder}
-                        maxOrder={maxOrder}
-                        pageId={pageId}
-                      />
+      <div className="page-inner">
+        <PageAddressBar
+          page={"Formularz / Edytuj"}
+        />{" "}
+        <FormDescription location={location} pageId={pageId} />
+        <section className="page-section">
+          <header className="card-header">Sekcje strony</header>
+          <form onSubmit={handleSave}>
+            <div className="row">
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="dp1">
+                  {(provided) => (
+                    <div
+                      className="col"
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {loading ? (
+                        <div className="p-3">Ładowanie...</div>
+                      ) : null}
+                      {errorMessage !== "" ? (
+                        <div className="p-3">{errorMessage}</div>
+                      ) : (
+                        <FormSection
+                          sections={sections}
+                          answers={answers}
+                          setAnswers={setAnswers}
+                          setSections={setSections}
+                          maxOrder={maxOrder}
+                          updateMaxOrder={updateMaxOrder}
+                        />
+                      )}
+                      {provided.placeholder}
                     </div>
-                  </div>
-                </form>
-              </section>
+                  )}
+                </Droppable>
+              </DragDropContext>
+              <div className="col-auto">
+                <FormAddSection
+                  setSections={setSections}
+                  sections={sections}
+                  setAnswers={setAnswers}
+                  answers={answers}
+                  updateMaxOrder={updateMaxOrder}
+                  maxOrder={maxOrder}
+                  pageId={pageId}
+                />
+              </div>
             </div>
-          </div>
-        </div>
-      </main>
+          </form>
+        </section>
       {saved ? (
         <div
           className="fixed-bottom d-flex justify-content-center show-and-hide"

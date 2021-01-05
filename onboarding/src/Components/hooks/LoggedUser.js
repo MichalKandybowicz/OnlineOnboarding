@@ -28,7 +28,8 @@ function LoggedUser(){
 			(error) => {
 				showError(true);
 			}
-		);console.log("   Use effect is used");
+		);
+		// console.log("   Use effect is used");
 	}, []);
 
 
@@ -36,7 +37,7 @@ function LoggedUser(){
 		userModel.first_name = "(problem z pobraniem)";
 		return userModel;
 	} else if(!loaded){
-		userModel.first_name = "username...";
+		userModel.first_name = "...";
 		return userModel;
 	}
 

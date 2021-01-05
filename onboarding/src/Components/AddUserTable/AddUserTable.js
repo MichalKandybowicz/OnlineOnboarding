@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import Users from "../hooks/Users";
 import AddUserTableRow from "./Add_User_Table_Row";
 //import UserListSearch from "../UserListSearch";
-import LoggedUser from "../hooks/LoggedUser.js";
 import { assignEmployeeToPackage } from "../hooks/EmployeeForms";
 
 function AddUserTable(props) {
-    let loggedUser = (props.loggedUser) ? props.loggedUser : LoggedUser();
     let title = "Adresaci";
 
     const [error, showError] = useState(false);
@@ -25,10 +23,10 @@ function AddUserTable(props) {
     }, [props.packageCurrent]);
 
     useEffect(() => {
-      if(loggedUser.id !== 0) {
-        Users(loggedUser, setUsers, null, isLoaded, showError);
+      if(props.loggedUser.id !== 0) {
+        Users(props.loggedUser, setUsers, null, isLoaded, showError);
       }
-    }, [loggedUser]);
+    }, [props.loggedUser]);
 
     const sendToEmployee = (e) => {
       let employeeId = e.target.value; // id of user on row of button;

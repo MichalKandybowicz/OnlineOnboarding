@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import UserListSearch from "../UserListSearch";
 import Users, { employeeRemove } from "../hooks/Users";
 import { usersWithPackages } from "../hooks/Packages";
-import LoggedUser from "../hooks/LoggedUser.js";
 import ModalWarning from "../ModalWarning";
 import UserListRow from "./UserListRow";
 
 
-function UsersList(props) {
-    let loggedUser = (props.loggedUser)?props.loggedUser:LoggedUser();
-    let packageId = 0;
-    if(props.packageId)
-        packageId = props.packageId;
-
+function UsersList({ loggedUser }) {
 	const [loaded, isLoaded] = useState(false);
 	const [error, showError] = useState(null);
     const [countUpdate, update] = useState(0);
@@ -85,7 +79,6 @@ function UsersList(props) {
                             user={user}
                             key={user.id}
                             handleRemove={removeAsk}
-                            packageId={packageId}
                             loggedUser={loggedUser}
                         />
                     )) : <p>Brak wyników</p>

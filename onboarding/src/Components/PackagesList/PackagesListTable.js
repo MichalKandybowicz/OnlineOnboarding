@@ -1,15 +1,12 @@
 import React, { useState/*, useEffect*/ } from "react";
 import PackagesAddNew from "./PackagesAddNew";
 import Packages, { removeCombo } from "../hooks/Packages";
-import LoggedUser from "../hooks/LoggedUser.js";
 import ModalWarning from "../ModalWarning";
 
 
 function PackagesListTable(props) {
     const [countUpdate, update] = useState(0);
     const [packageIdModal, setPackageIdModal ] = useState({id: 0, modal: <></>});
-    //let packages = <Packages count = countUpdate />;
-    let loggedUser = (props.loggedUser)?props.loggedUser:LoggedUser();
 
     var updatePackages = function(){
     	update(countUpdate + 1);
@@ -71,7 +68,7 @@ function PackagesListTable(props) {
                         </tr>
                         </thead>
                         <tbody id="form_table_data_container">
-                            <Packages count = { countUpdate } handleRemoveAsk = { removeAsk } loggedUser={ loggedUser } />
+                            <Packages count = { countUpdate } handleRemoveAsk = { removeAsk } setPackageId={props.setPackageId} />
                         </tbody>
                     </table>
                 </div>

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { removePage } from "../hooks/PackagePage";
+// import { removePage } from "../hooks/PackagePage";
 import { dateToString } from "../utils";
 import "../../static/css/style.css";
 
 function FormTableRow(props) {
     const [styleRow, setStyleRow] = useState(null);
-
-    let loggedUser = {};
-    if(props.loggedUser)
-        loggedUser = props.loggedUser;
 
     useEffect(() => {
         if(props.lastRow && Date.now() - Date.parse(props.row.last_edit) < 3000) {
@@ -32,7 +28,6 @@ function FormTableRow(props) {
                 pageName: props.row.name,
                 description: props.row.description,
                 link: props.row.link,
-                loggedUser: loggedUser,
               },
             }}
           >
@@ -51,7 +46,6 @@ function FormTableRow(props) {
                 pageName: props.row.name,
                 description: props.row.description,
                 link: props.row.link,
-                loggedUser: loggedUser,
               },
             }}
             className="btn btn-secondary"

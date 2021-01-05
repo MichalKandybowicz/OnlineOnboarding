@@ -5,16 +5,8 @@ import { dateToString } from "../utils";
 import "../../static/css/style.css";
 
 
-function PackagesRow({ row, handleRemoveAsk, lastRow, loggedUser }) {
+function PackagesRow({ row, handleRemoveAsk, lastRow, setPackageId }) {
     const [styleRow, setStyleRow] = useState(null);
-
-    /*var removeSuccess = (result) => {
-        handleUpdate();/ / update list of packages;
-    };*/
-
-    /*var handleRemove = function(){
-        removeCombo(handleUpdate, row.key);
-    }*/
 
     useEffect(() => {
         if(lastRow && Date.now() - Date.parse(row.created) < 3000) {
@@ -24,12 +16,18 @@ function PackagesRow({ row, handleRemoveAsk, lastRow, loggedUser }) {
         }
     }, [lastRow]);
 
+    const handleClick = () => {
+        setPackageId(row.key);
+    }
+
     return(
         <tr className={styleRow}>
-            <td><Link to={{ pathname: "/package_page/" + row.key, state: { packageId: row.key, loggedUser: loggedUser } }} className="link">{row.name}</Link></td> 
+            <td>
+                <Link to={{ pathname: "/package_page/" + row.key, state: { packageId: row.key, setPackageId: setPackageId } }} onClick={ () => setPackageId(row.key) } className="link">{row.name}</Link>
+            </td> 
             <td>{ dateToString(row.last_edit) }</td>{/* na polski; */}
             <td>
-                <Link to={{ pathname: "/package_page/" + row.key, state: { packageId: row.key, loggedUser: loggedUser } }} className="btn btn-secondary">edytuj</Link> / <button type="button" value={ row.key } className="btn btn-secondary" onClick={ handleRemoveAsk }>usuń</button>
+                <Link to={{ pathname: "/package_page/" + row.key, state: { packageId: row.key, setPackageId: setPackageId } }} onClick={ handleClick } className="btn btn-secondary">edytuj</Link> / <button type="button" value={ row.key } className="btn btn-secondary" onClick={ handleRemoveAsk }>usuń</button>
             </td>
         </tr>
     )
