@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageAddressBar from "../PageAddressBar";
 import UsersList from "./UsersList";
 
 function UserListPage(props) {
-    document.title= "Onboarding: lista pracowników";
+		document.title= "Onboarding: lista pracowników";
+		
+		useEffect(() => {
+			props.setPackageId(0);
+		}, []);
 
     return(
 			<div className="page-inner">

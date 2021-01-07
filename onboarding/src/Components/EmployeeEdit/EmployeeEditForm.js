@@ -8,21 +8,20 @@ function EmployeeEditForm(props) {
     document.title = "Onboarding: dodaj pracownika";
     const fileNameRef = useRef("");
     const [employeeModal, setModal ] = useState(<></>);
-
+    
     let userCp = {id: 0, name: "", last_name: "", email: "", tel: "",
         position: "", department: "", location: "", avatar: "/onboarding/static/images/unknown-profile.jpg"};
-    if(props.user)
+        if(props.user)
         userCp = {...props.user};
-
-    let imageBox = <img src={ userCp.avatar } alt="avatar" />;
+        
+        let imageBox = <img src={ userCp.avatar } alt="avatar" />;
     if(props.enableUploadAvatar){
         imageBox = <>
                      <div className="fileinput-button-label"> Dodaj/zmień zdjęcie </div><img src={ userCp.avatar } alt="avatar" />
                      <input id="fileupload-avatar" type="file" name="avatar" ref={ fileNameRef } />
                    </>;
     }
-
-
+    
     const [imageLink, updateImageLink] = useState(userCp.avatar);
 
     const handleSaveEdit = user => {

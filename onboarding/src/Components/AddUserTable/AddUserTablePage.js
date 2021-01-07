@@ -7,10 +7,10 @@ import ModalWarning from "../ModalWarning";
 
 function AddUserTablePage(props) {
     const [confirmationModal, setIdModal ] = useState({id: 0, modal: <></>});
+    const packageObj = singleCombo(props.packageId);
 
     document.title = "Onboarding: wyślij pracownikowi";
 
-    const packageObj = singleCombo(props.packageId);
 
     const popUpConfirmationModal = (message) => {
         setIdModal({id: 0,
@@ -22,11 +22,15 @@ function AddUserTablePage(props) {
         setIdModal({id: 0, modal: <></>});
     };
 
-
     return(
         <div className="page-inner">
             <PageAddressBar page={ "Wyślij pracownikowi" } />
-            <AddUserTable loggedUser={ props.loggedUser } packageId={ props.packageId } packageCurrent={ packageObj } showModal={ popUpConfirmationModal } />
+            <AddUserTable 
+                loggedUser={ props.loggedUser } 
+                packageId={ props.packageId } 
+                packageCurrent={ packageObj } 
+                showModal={ popUpConfirmationModal } 
+            />
             { confirmationModal.modal }
         </div>
     )

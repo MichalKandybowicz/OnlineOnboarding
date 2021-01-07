@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import EmployeeEditForm from "./EmployeeEditForm";
 import PageAddressBar from "../PageAddressBar"
 
@@ -47,7 +47,10 @@ function UserManagerProfilePage(props) {
     let enableUploadAvatar = false;
     // if(props.location.state.enableUploadAvatar)
     //     enableUploadAvatar = true;
-
+    
+    // useEffect(() => {
+    //     props.setPackageId(0);
+    //   }, []);
 
     return (
         <div className="page-inner">

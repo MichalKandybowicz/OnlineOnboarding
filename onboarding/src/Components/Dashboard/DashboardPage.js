@@ -11,8 +11,12 @@ function DashboardPage(props) {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
+    props.setPackageId(0);
+  }, []);
+  
+  useEffect(() => {
     getUsers(setIsEmployee, setEmployees, setIsLoaded);
-  }, [props.count])
+  }, [props.count]);
 
   document.title= "Onboarding: pulpit";
 

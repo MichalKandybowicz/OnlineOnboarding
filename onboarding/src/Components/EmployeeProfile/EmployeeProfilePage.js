@@ -50,6 +50,10 @@ function EmployeeProfilePage(props) {
             singleUser.avatar = user.avatar;
     }
 
+    useEffect(() => {
+        props.setPackageId(0);
+      }, []);
+
     return(
         <div className="page-inner">
             <PageAddressBar page={ "Podgląd procesu pracownika" } />

@@ -35,7 +35,7 @@ function NavbarEmployee(props) {
                                 ? <a href="#" onClick={ () => props.loadFormPages(props.actualPackage) }>{ props.pageTitle }</a> 
                                 : props.pageTitle 
                             }
-                        </li> 
+                        </li>
                         : <></>
                     }
                     { props.formTitle
@@ -50,7 +50,11 @@ function NavbarEmployee(props) {
             <div className="top-bar-item top-bar-item-right px-0">
                 <div className="dropdown d-flex">
                     <div className="form-inline my-2 my-lg-0">
-                        <button className="btn-account d-md-flex" type="button" data-toggle="dropdown">
+                        <button 
+                            className="btn-account d-md-flex" 
+                            type="button" 
+                            data-toggle="dropdown"
+                        >
                             <span className="user-avatar user-avatar-md"><img src={ loggedUser.avatar } alt={ loggedUser.first_name + " - avatar" } /></span>
                             <span className="d-none d-sm-flex"><i>Witaj { loggedUser.first_name }</i></span>
                         </button>

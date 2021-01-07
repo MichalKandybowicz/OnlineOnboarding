@@ -28,9 +28,9 @@ function ModalWarning(props) {
 
 
     let link, useLink = false;
-    if(props.link && props.link.loggedUser && typeof props.link.packageId !== 'undefined' && props.link.to){
+    if(props.link && props.link.to){
         useLink = true;
-        link = (<NavLink to={{ pathname: props.link.to, state: { packageId: props.link.packageId, loggedUser: props.link.loggedUser } }} className="btn btn-warning" ref={ linkButton }>
+        link = (<NavLink to={{ pathname: props.link.to }} className="btn btn-warning" ref={ linkButton }>
         { acceptText }</NavLink>);
     }
 

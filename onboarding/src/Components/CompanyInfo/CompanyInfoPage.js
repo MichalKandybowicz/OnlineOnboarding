@@ -4,13 +4,17 @@ import CompanyInfoContent from "./CompanyInfoContent";
 import CompanyInfoAPI from "../hooks/CompanyInfoAPI";
 import PageAddressBar from "../PageAddressBar";
 
-const CompanyInfoPage = ({ loggedUser }) => {
+const CompanyInfoPage = ({ loggedUser, setPackageId }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [company, setCompany] = useState("");
 
   document.title = "Onboarding: informacje o firmie";
 
+  useEffect(() => {
+    setPackageId(0);
+  }, []);
+  
   useEffect(() => {
     if(loggedUser.id) {
       CompanyInfoAPI.getCompanyInfo(loggedUser.company_id)
